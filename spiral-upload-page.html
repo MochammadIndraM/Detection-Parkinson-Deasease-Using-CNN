@@ -20,23 +20,30 @@
             <a href="#" class="bg-[#C6C6C6] rounded-xl px-3 py-2 hover:text-[#0C8CE9]">Spiral</a>
             <a href="wave-upload-page.html" class="rounded-xl px-3 py-2 hover:text-[#0C8CE9]">Wave</a>
         </div>
-        <!-- <div class="h-[500px] w-full mt-5 bg-[#C6C6C6] rounded-[50px] flex flex-col justify-center">
-            <a href="#" class="h-10 w- bg-[#0C8CE9] text-white rounded-xl px-3 py-2 hover:bg-[#0870BB] ">Upload</a>
-            <div class="hidden sm:flex flex-col gap-1.5">
-                <p class="m-0 font-bold text-xl text-typo-secondary">or drop a file</p>
+        
+        <div class="flex flex-auto gap-9">
+            <div class="w-6/12 h-96 mt-10 flex flex-col sm:justify-center sm:items-center sm:gap-8 rounded-4xl bg-white shadow-2xl">
+                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-full flex-1 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-white">
+                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                        <img id="image-preview" class="w-full h-72 mb-4 object-cover hidden" src="" alt="">
+                        <svg id="svg-icon" class="w-8 h-8 mb-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                        </svg>
+                        <p id="click-to-upload" class="mb-2 text-sm font-poppins-regular"><span class="font-semibold">Click to upload</span></p>
+                    </div>
+                    <input id="dropzone-file" type="file" class="hidden" />
+                </label>
             </div>
-        </div> -->
-        <div
-            class="w-full mt-10 flex flex-col sm:justify-center sm:items-center sm:gap-8 sm:pt-36 sm:pb-16 rounded-4xl bg-white shadow-2xl">
-            <input type="file" id="fileInput" style="display: none;">
-            <label for="fileInput"
-                class="bg-[#0C8CE9] text-2xl font-poppins-semibold text-white rounded-xl px-3 py-2 hover:bg-[#0870BB]">Upload</label>
-            <div class="hidden sm:flex flex-col gap-1.5">
-                <p class="m-0 font-bold text-xl text-typo-secondary">or drop a file,</p><span
-                    class="text-xs text-typo-secondary text-center">paste image or <a href="#"
-                        class="text-typo-secondary select-photo-url-btn underline">URL</a> </span>
+            
+
+            <div
+                class="w-6/12 mt-10 flex flex-col sm:justify-center sm:items-center sm:gap-8 sm:pt-36 sm:pb-16 rounded-4xl bg-white shadow-2xl">
+
             </div>
+
         </div>
+
 
         <div class="flex justify-center gap-4 mt-10">
             <a href="#" class="bg-[#0C8CE9] text-white rounded-xl px-3 py-2 hover:bg-[#0870BB]">Rotate</a>
@@ -57,8 +64,46 @@
         xmlns="http://www.w3.org/2000/svg">
         <path
             d="M328.758 114.453C355.37 146.481 374.916 176.861 391.401 215.954C407.651 255.047 421.074 302.853 405.06 336.059C389.046 369.5 343.595 388.575 303.56 388.81C263.289 388.81 228.435 369.735 193.11 355.605C157.785 341.24 121.989 331.349 97.2615 306.621C72.2985 281.894 58.6395 241.859 58.404 197.349C58.1685 153.075 71.121 104.091 102.914 73.2405C134.706 42.1545 185.103 29.202 227.022 39.3285C268.941 49.2195 302.382 82.6605 328.758 114.453Z"
-            fill="#0C8CE9"  />
+            fill="#0C8CE9" />
     </svg>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    
+    <script>
+        function previewImage() {
+            var input = document.getElementById('dropzone-file');
+            var preview = document.getElementById('image-preview');
+            var svgIcon = document.getElementById('svg-icon');
+            var clickToUpload = document.getElementById('click-to-upload');
+    
+            input.addEventListener('change', function () {
+                var file = input.files[0];
+    
+                if (file) {
+                    var reader = new FileReader();
+    
+                    reader.onload = function (e) {
+                        preview.src = e.target.result;
+                        preview.classList.remove('hidden'); // Show the image preview
+                        svgIcon.classList.add('hidden'); // Hide the SVG icon
+                        clickToUpload.style.display = 'none'; // Hide the "Click to upload" text
+                    };
+    
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    
+        // Call the function to enable image preview
+        previewImage();
+    </script>
+    
+    
+    
 </body>
 
 </html>
